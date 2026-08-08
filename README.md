@@ -105,6 +105,22 @@ The API runs at:
 http://127.0.0.1:5000
 ```
 
+If port `5000` is already in use, stop the running Flask server with `Ctrl + C`.
+You can also run the app on a different port:
+
+Windows PowerShell:
+
+```powershell
+$env:PORT=5001
+python run.py
+```
+
+Then update the Postman `base_url` to:
+
+```text
+http://127.0.0.1:5001
+```
+
 The SQLite database is created automatically inside the Flask `instance` folder when the app starts.
 
 ## Reset The Database
