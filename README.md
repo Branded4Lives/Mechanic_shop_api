@@ -7,6 +7,7 @@ This project is a Flask REST API for a mechanic shop. It uses the Application Fa
 - Flask application factory in `app/__init__.py`
 - SQLAlchemy models for customers, mechanics, and service tickets
 - Many-to-many relationship between mechanics and service tickets
+- ERD documentation in `ERD.md`
 - Blueprint folder for each resource
 - Marshmallow schemas for serialization and validation
 - Customer CRUD routes
@@ -48,7 +49,12 @@ config.py
 run.py
 requirements.txt
 Mechanic_Shop_API.postman_collection.json
+ERD.md
 ```
+
+## ERD
+
+See the entity relationship diagram in [`ERD.md`](ERD.md).
 
 ## Getting Started
 
