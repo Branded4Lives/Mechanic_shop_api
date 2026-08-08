@@ -1,66 +1,56 @@
-# Video Presentation Script
+# Simple Video Script
 
-Target length: 3 to 5 minutes. Keep it simple, show the required files, then show the API working in Postman.
+Target length: 2 minutes.
+
+Do not explain every line of code. Just show that the required pieces exist and that the API works.
 
 ## Before You Record
 
-Have these open:
+Open:
 
-- VS Code with this project open
-- A terminal in the project folder
-- Postman with `Mechanic_Shop_API.postman_collection.json` imported
+- VS Code
+- Terminal
+- Postman
 
-Start the API before or during the recording:
+Start the API:
 
 ```bash
 python run.py
 ```
 
-The API should be running at:
+Use:
 
 ```text
 http://127.0.0.1:5000
 ```
 
-## 1. Introduction - 15 Seconds
+## 1. Intro - 10 Seconds
 
-**Where to be:** VS Code, project root.
+**Show:** VS Code project folder.
 
-What to say:
+**Say:**
 
-Hi, my name is Brandon, and this is my Mechanic Shop API project.
+Hi, my name is Brandon. This is my Mechanic Shop API.
 
-This is a Flask REST API for a mechanic shop. It manages customers, mechanics, and service tickets. The project uses the Application Factory Pattern, SQLAlchemy models, Marshmallow schemas, Flask blueprints, and a Postman collection for testing.
+It is a Flask REST API for customers, mechanics, and service tickets.
 
-## 2. Show The Project Structure - 30 Seconds
+## 2. Project Structure - 15 Seconds
 
-**Where to be:** VS Code file explorer.
+**Show:** File explorer in VS Code.
 
-What to show:
+**Say:**
 
-- `app/`
-- `app/customers/`
-- `app/mechanics/`
-- `app/service_tickets/`
-- `app/models.py`
-- `README.md`
-- `Mechanic_Shop_API.postman_collection.json`
+The project is organized into blueprint folders for customers, mechanics, and service tickets.
 
-What to say:
+Each resource has its own routes and schemas.
 
-The project is organized by resource. Customers, mechanics, and service tickets each have their own blueprint folder. Each folder has an `__init__.py`, a `routes.py`, and a `schemas.py` file.
+## 3. App Factory - 20 Seconds
 
-This keeps the API organized and matches the assignment requirement for blueprint folders.
-
-## 3. Show The Application Factory - 30 Seconds
-
-**Where to be:** `app/__init__.py`.
-
-What to show:
+**Show:** `app/__init__.py`
 
 Point to `create_app`.
 
-Then point to these lines:
+Point to the blueprint registration lines:
 
 ```python
 app.register_blueprint(customers_bp, url_prefix="/customers")
@@ -68,249 +58,102 @@ app.register_blueprint(mechanics_bp, url_prefix="/mechanics")
 app.register_blueprint(service_tickets_bp, url_prefix="/service-tickets")
 ```
 
-What to say:
+**Say:**
 
-This file uses the Application Factory Pattern. The `create_app` function creates the Flask app, initializes the database, registers the blueprints, and assigns the required URL prefixes.
+This is my application factory. It creates the Flask app, initializes the database, and registers the three blueprints.
 
-The mechanic routes use `/mechanics`, and the service ticket routes use `/service-tickets`, which matches the rubric.
+## 4. Models - 20 Seconds
 
-## 4. Show The Models - 30 Seconds
+**Show:** `app/models.py`
 
-**Where to be:** `app/models.py`.
-
-What to show:
+Point to:
 
 - `Customer`
 - `Mechanic`
 - `ServiceTicket`
 - `service_ticket_mechanics`
 
-What to say:
+**Say:**
 
-These are my database models. A customer can have many service tickets. Mechanics and service tickets have a many-to-many relationship through the `service_ticket_mechanics` table.
+These are my SQLAlchemy models.
 
-That relationship is what allows a mechanic to be assigned to a service ticket and removed from a service ticket.
+Customers can have service tickets, and mechanics can be assigned to service tickets using the many-to-many table.
 
-## 5. Show Mechanic Schema And Routes - 45 Seconds
+## 5. Routes And Schemas - 25 Seconds
 
-**Where to be:** first `app/mechanics/schemas.py`, then `app/mechanics/routes.py`.
+**Show quickly:**
 
-What to show in `schemas.py`:
+- `app/mechanics/routes.py`
+- `app/mechanics/schemas.py`
+- `app/service_tickets/routes.py`
+- `app/service_tickets/schemas.py`
 
-- `MechanicSchema`
-- `MechanicCreateSchema`
-- `MechanicUpdateSchema`
+**Say:**
 
-What to say:
+The schemas validate and serialize data.
 
-This file contains the Marshmallow schemas for mechanics. I used `SQLAlchemyAutoSchema` for serialization, and separate create and update schemas for validating incoming JSON.
+The mechanic routes have full CRUD.
 
-**Where to be next:** `app/mechanics/routes.py`.
+The service ticket routes create tickets, get tickets, assign mechanics, and remove mechanics.
 
-What to show:
+## 6. Postman Demo - 45 Seconds
 
-- `POST /`
-- `GET /`
-- `GET /<int:mechanic_id>`
-- `PUT /<int:mechanic_id>`
-- `DELETE /<int:mechanic_id>`
+**Show:** Postman.
 
-What to say:
-
-These are the full CRUD routes for mechanics. I can create, retrieve, update, and delete mechanics. The route paths are short because the blueprint already has the `/mechanics` URL prefix.
-
-## 6. Show Service Ticket Schema And Routes - 45 Seconds
-
-**Where to be:** first `app/service_tickets/schemas.py`, then `app/service_tickets/routes.py`.
-
-What to show in `schemas.py`:
-
-- `ServiceTicketSchema`
-- nested `customer`
-- nested `mechanics`
-- `mechanic_ids`
-
-What to say:
-
-This schema serializes service tickets and includes nested customer and mechanic information. The create schema accepts `mechanic_ids`, so mechanics can be attached when a ticket is created.
-
-**Where to be next:** `app/service_tickets/routes.py`.
-
-What to show:
-
-- `POST /`
-- `GET /`
-- `PUT /<int:ticket_id>/assign-mechanic/<int:mechanic_id>`
-- `PUT /<int:ticket_id>/remove-mechanic/<int:mechanic_id>`
-
-What to say:
-
-These service ticket routes match the assignment requirements. I can create service tickets, retrieve all service tickets, assign mechanics, and remove mechanics using the relationship list.
-
-## 7. Postman Demo - 1 To 2 Minutes
-
-**Where to be:** Terminal first.
-
-What to show:
-
-Run:
-
-```bash
-python run.py
-```
-
-What to say:
-
-Now I am running the Flask server locally so I can test the API in Postman.
-
-**Where to be next:** Postman.
-
-### Step 1: Create A Customer
-
-Request:
+Run these requests from the collection:
 
 ```text
-POST {{base_url}}/customers/
+POST /customers/
+POST /mechanics/
+POST /service-tickets/
+PUT /service-tickets/1/assign-mechanic/1
+GET /service-tickets/
 ```
 
-Body:
+**Say while clicking:**
 
-```json
-{
-  "first_name": "Brandon",
-  "last_name": "Customer",
-  "email": "brandon@example.com",
-  "phone": "555-0100",
-  "address": "123 Main St"
-}
-```
+First, I create a customer.
 
-What to say:
+Next, I create a mechanic.
 
-First, I create a customer. The response gives me a customer ID, which I will use when creating the service ticket.
+Then I create a service ticket for the customer.
 
-### Step 2: Create A Mechanic
+Now I assign the mechanic to the service ticket.
 
-Request:
+Finally, I get all service tickets and can see the ticket data returned by the API.
 
-```text
-POST {{base_url}}/mechanics/
-```
+Use the actual IDs from your responses if they are not `1`.
 
-Body:
+## 7. Closing - 10 Seconds
 
-```json
-{
-  "first_name": "Maya",
-  "last_name": "Wrench",
-  "email": "maya@example.com",
-  "phone": "555-0111",
-  "specialty": "Diagnostics"
-}
-```
+**Show:** README and Postman collection.
 
-What to say:
+**Say:**
 
-Next, I create a mechanic. The response gives me a mechanic ID.
+This project includes the required Flask app structure, models, schemas, routes, README, and Postman collection.
 
-### Step 3: Create A Service Ticket
+Thank you for watching.
 
-Request:
+## Emergency Short Version
 
-```text
-POST {{base_url}}/service-tickets/
-```
+Use this if you feel rushed:
 
-Body:
+Hi, my name is Brandon. This is my Mechanic Shop API.
 
-```json
-{
-  "customer_id": 1,
-  "vin": "1HGCM82633A004352",
-  "description": "Oil change and brake inspection",
-  "service_date": "2026-08-08",
-  "status": "open"
-}
-```
+It uses Flask, SQLAlchemy, Marshmallow, blueprints, and Postman.
 
-What to say:
+Here is my app factory and blueprint registration.
 
-Now I create a service ticket for the customer. The ticket includes the customer ID, VIN, description, service date, and status.
+Here are my models for customers, mechanics, service tickets, and the mechanic-ticket relationship.
 
-Use the actual customer ID from your response if it is not `1`.
+Here are my mechanic routes and service ticket routes.
 
-### Step 4: Assign A Mechanic
+Now I will test the API in Postman.
 
-Request:
+I create a customer, create a mechanic, create a service ticket, assign the mechanic, and retrieve all service tickets.
 
-```text
-PUT {{base_url}}/service-tickets/1/assign-mechanic/1
-```
+The API returns the expected data.
 
-What to say:
+This project includes the required README and Postman collection.
 
-Now I assign the mechanic to the service ticket. This uses the many-to-many relationship between service tickets and mechanics.
-
-Use the actual ticket ID and mechanic ID from your responses if they are not `1`.
-
-### Step 5: Get All Service Tickets
-
-Request:
-
-```text
-GET {{base_url}}/service-tickets/
-```
-
-What to say:
-
-Now I retrieve all service tickets. In the response, I can see the ticket information and the assigned mechanic.
-
-### Step 6: Remove A Mechanic
-
-Request:
-
-```text
-PUT {{base_url}}/service-tickets/1/remove-mechanic/1
-```
-
-What to say:
-
-Finally, I remove the mechanic from the service ticket. This shows that the relationship can be added and removed through the API.
-
-## 8. Show README And Postman Collection - 20 Seconds
-
-**Where to be:** VS Code.
-
-What to show:
-
-- `README.md`
-- `Mechanic_Shop_API.postman_collection.json`
-
-What to say:
-
-The repository includes a README with setup and endpoint instructions. It also includes an exported Postman collection so the endpoints can be tested.
-
-## 9. Closing - 15 Seconds
-
-**Where to be:** VS Code or Postman.
-
-What to say:
-
-This project meets the rubric by using the Application Factory Pattern, Flask blueprints, Marshmallow schemas, full mechanic CRUD routes, service ticket creation, mechanic assignment and removal, service ticket retrieval, README instructions, and an exported Postman collection.
-
-Thank you for watching my presentation.
-
-## Quick Rubric Checklist
-
-- Show `app/__init__.py`
-- Show blueprint registration
-- Show `app/mechanics/`
-- Show `app/service_tickets/`
-- Show Marshmallow schemas
-- Show mechanic CRUD routes
-- Show service ticket create and get routes
-- Show assign mechanic route
-- Show remove mechanic route
-- Show Postman tests
-- Show README
-- Mention GitHub repository and Disco video upload
+Thank you for watching.
