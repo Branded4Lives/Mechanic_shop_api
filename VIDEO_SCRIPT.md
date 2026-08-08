@@ -24,7 +24,7 @@ http://127.0.0.1:5000
 
 ## 1. Introduction - 15 Seconds
 
-Where to be: VS Code, project root.
+**Where to be:** VS Code, project root.
 
 What to say:
 
@@ -34,7 +34,7 @@ This is a Flask REST API for a mechanic shop. It manages customers, mechanics, a
 
 ## 2. Show The Project Structure - 30 Seconds
 
-Where to be: VS Code file explorer.
+**Where to be:** VS Code file explorer.
 
 What to show:
 
@@ -54,7 +54,7 @@ This keeps the API organized and matches the assignment requirement for blueprin
 
 ## 3. Show The Application Factory - 30 Seconds
 
-Where to be: `app/__init__.py`.
+**Where to be:** `app/__init__.py`.
 
 What to show:
 
@@ -76,7 +76,7 @@ The mechanic routes use `/mechanics`, and the service ticket routes use `/servic
 
 ## 4. Show The Models - 30 Seconds
 
-Where to be: `app/models.py`.
+**Where to be:** `app/models.py`.
 
 What to show:
 
@@ -93,7 +93,7 @@ That relationship is what allows a mechanic to be assigned to a service ticket a
 
 ## 5. Show Mechanic Schema And Routes - 45 Seconds
 
-Where to be: first `app/mechanics/schemas.py`, then `app/mechanics/routes.py`.
+**Where to be:** first `app/mechanics/schemas.py`, then `app/mechanics/routes.py`.
 
 What to show in `schemas.py`:
 
@@ -105,7 +105,7 @@ What to say:
 
 This file contains the Marshmallow schemas for mechanics. I used `SQLAlchemyAutoSchema` for serialization, and separate create and update schemas for validating incoming JSON.
 
-Where to be next: `app/mechanics/routes.py`.
+**Where to be next:** `app/mechanics/routes.py`.
 
 What to show:
 
@@ -121,7 +121,7 @@ These are the full CRUD routes for mechanics. I can create, retrieve, update, an
 
 ## 6. Show Service Ticket Schema And Routes - 45 Seconds
 
-Where to be: first `app/service_tickets/schemas.py`, then `app/service_tickets/routes.py`.
+**Where to be:** first `app/service_tickets/schemas.py`, then `app/service_tickets/routes.py`.
 
 What to show in `schemas.py`:
 
@@ -134,7 +134,7 @@ What to say:
 
 This schema serializes service tickets and includes nested customer and mechanic information. The create schema accepts `mechanic_ids`, so mechanics can be attached when a ticket is created.
 
-Where to be next: `app/service_tickets/routes.py`.
+**Where to be next:** `app/service_tickets/routes.py`.
 
 What to show:
 
@@ -149,7 +149,7 @@ These service ticket routes match the assignment requirements. I can create serv
 
 ## 7. Postman Demo - 1 To 2 Minutes
 
-Where to be: Terminal first.
+**Where to be:** Terminal first.
 
 What to show:
 
@@ -163,7 +163,7 @@ What to say:
 
 Now I am running the Flask server locally so I can test the API in Postman.
 
-Where to be next: Postman.
+**Where to be next:** Postman.
 
 ### Step 1: Create A Customer
 
@@ -279,7 +279,7 @@ Finally, I remove the mechanic from the service ticket. This shows that the rela
 
 ## 8. Show README And Postman Collection - 20 Seconds
 
-Where to be: VS Code.
+**Where to be:** VS Code.
 
 What to show:
 
@@ -292,7 +292,7 @@ The repository includes a README with setup and endpoint instructions. It also i
 
 ## 9. Closing - 15 Seconds
 
-Where to be: VS Code or Postman.
+**Where to be:** VS Code or Postman.
 
 What to say:
 
@@ -314,4 +314,3 @@ Thank you for watching my presentation.
 - Show Postman tests
 - Show README
 - Mention GitHub repository and Disco video upload
-
