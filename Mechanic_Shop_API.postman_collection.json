@@ -1,0 +1,419 @@
+{
+  "info": {
+    "_postman_id": "3e6795a6-88c5-49eb-b2aa-1bb17cb0317a",
+    "name": "Mechanic Shop API",
+    "description": "Postman collection for testing the Mechanic Shop API customer, mechanic, and service ticket routes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:5000",
+      "type": "string"
+    },
+    {
+      "key": "customer_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "mechanic_id",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "ticket_id",
+      "value": "1",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Customers",
+      "item": [
+        {
+          "name": "Create Customer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.id) { pm.collectionVariables.set('customer_id', data.id); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Brandon\",\n  \"last_name\": \"Customer\",\n  \"email\": \"brandon{{$randomInt}}@example.com\",\n  \"phone\": \"555-0100\",\n  \"address\": \"123 Main St\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "customers",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Customers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "customers",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Customer By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "customers",
+                "{{customer_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Customer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"phone\": \"555-0199\",\n  \"address\": \"456 Updated Ave\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "customers",
+                "{{customer_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Customer",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/customers/{{customer_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "customers",
+                "{{customer_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mechanics",
+      "item": [
+        {
+          "name": "Create Mechanic",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.id) { pm.collectionVariables.set('mechanic_id', data.id); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"first_name\": \"Maya\",\n  \"last_name\": \"Wrench\",\n  \"email\": \"maya{{$randomInt}}@example.com\",\n  \"phone\": \"555-0111\",\n  \"specialty\": \"Diagnostics\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/mechanics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mechanics",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Mechanics",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/mechanics/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mechanics",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Mechanic By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/mechanics/{{mechanic_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mechanics",
+                "{{mechanic_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Mechanic",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"specialty\": \"Electrical Diagnostics\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/mechanics/{{mechanic_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mechanics",
+                "{{mechanic_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Mechanic",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/mechanics/{{mechanic_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mechanics",
+                "{{mechanic_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Service Tickets",
+      "item": [
+        {
+          "name": "Create Service Ticket",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const data = pm.response.json();",
+                  "if (data.id) { pm.collectionVariables.set('ticket_id', data.id); }"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"customer_id\": {{customer_id}},\n  \"vin\": \"1HGCM82633A004352\",\n  \"description\": \"Oil change and brake inspection\",\n  \"service_date\": \"2026-08-01\",\n  \"status\": \"open\",\n  \"mechanic_ids\": []\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/service-tickets/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get All Service Tickets",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/service-tickets/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Service Ticket By ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{base_url}}/service-tickets/{{ticket_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                "{{ticket_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Service Ticket",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"in progress\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/service-tickets/{{ticket_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                "{{ticket_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Assign Mechanic To Service Ticket",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/service-tickets/{{ticket_id}}/assign-mechanic/{{mechanic_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                "{{ticket_id}}",
+                "assign-mechanic",
+                "{{mechanic_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Remove Mechanic From Service Ticket",
+          "request": {
+            "method": "PUT",
+            "url": {
+              "raw": "{{base_url}}/service-tickets/{{ticket_id}}/remove-mechanic/{{mechanic_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                "{{ticket_id}}",
+                "remove-mechanic",
+                "{{mechanic_id}}"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Service Ticket",
+          "request": {
+            "method": "DELETE",
+            "url": {
+              "raw": "{{base_url}}/service-tickets/{{ticket_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "service-tickets",
+                "{{ticket_id}}"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
